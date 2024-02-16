@@ -1,9 +1,9 @@
-from pluma.pluma_app.handlers.board import boardViewSet
+from pluma_app.handlers.board import boardViewSet
 from rest_framework import routers
 
 
-router = routers.DefaultRouter()
-router.register(r"", boardViewSet)
+router = routers.SimpleRouter()
+router.register(r"", boardViewSet, basename="board")
 
 
 urlpatterns = router.urls
