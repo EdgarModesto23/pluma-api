@@ -3,7 +3,7 @@ from rest_framework import serializers
 from pluma_users.models import User
 
 
-class CreateUser(serializers.ModelSerializer):
+class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ["name", "username", "email", "password"]
