@@ -13,7 +13,6 @@ class boardViewSet(viewsets.ModelViewSet):
     serializer_class = serializers.boardSerializer
 
     def get_queryset(self):
-        print(self.request.user)
         return Board.objects.prefetch_related("note_board", "allowed_users").filter(
             allowed_users__email=self.request.user
         )
@@ -22,8 +21,8 @@ class boardViewSet(viewsets.ModelViewSet):
         user = User.objects.get(email=self.request.user)
         data = request.data
         data["creator"] = user.id
-        if "allowed_users" not in data.keys():
-            data["allowed_users"] = [user.id]
+        data["allowed_users"] = [user.id]
+        print(data)
         serializer = self.serializer_class(data=data)
         serializer.is_valid(raise_exception=True)
         serializer.save()

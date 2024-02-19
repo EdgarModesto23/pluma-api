@@ -15,14 +15,11 @@ class boardSerializer(serializers.ModelSerializer):
         model = Board
         fields = "__all__"
 
-    creator = EmailUser(many=False)
-    allowed_users = EmailUser(many=True, read_only=True)
-
 
 class retrieveBoardSerializer(serializers.ModelSerializer):
     class Meta:
         model = Board
-        fields = ["id", "title", "public", "creator", "allowed_users", "note_board"]
+        fields = ["id", "title", "creator", "allowed_users", "note_board"]
 
     allowed_users = EmailUser(many=True, read_only=True)
     note_board = NoteSerializer(many=True, read_only=True)
