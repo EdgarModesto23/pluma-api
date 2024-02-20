@@ -6,7 +6,7 @@ from pluma_users.models import User
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ["name", "username", "email", "password"]
+        fields = ["name", "username", "email", "password", "id"]
         extra_kwargs = {"password": {"write_only": True}}
 
     def create(self, validated_data):
