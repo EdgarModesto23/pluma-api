@@ -22,7 +22,6 @@ class boardViewSet(viewsets.ModelViewSet):
         data = request.data
         data["creator"] = user.id
         data["allowed_users"] = [user.id]
-        print(data)
         serializer = self.serializer_class(data=data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
@@ -44,7 +43,6 @@ class boardViewSet(viewsets.ModelViewSet):
         serializer = serializers.AllowedUserSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         data = dict(serializer.data)
-        print(data)
         try:
             board = Board.objects.prefetch_related("allowed_users").get(id=pk)
         except ObjectDoesNotExist:

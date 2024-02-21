@@ -9,10 +9,7 @@ class NoteViewSet(viewsets.ModelViewSet):
     serializer_class = NoteSerializer
 
     def get_queryset(self):
-        data = self.request.data
-        return Note.objects.select_related("board", "creator").filter(
-            board=data["board"]
-        )
+        return Note.objects.select_related("board", "creator").all()
 
     def get_serializer_context(self):
         return {"creator": self.request.user}
