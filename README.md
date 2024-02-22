@@ -8,6 +8,7 @@ Pluma is a reactive and collaborative note-taking web application that aims to s
 >
 > You are also expected to have already a blank Postgresql database in your local machine. Check [Postgresql documentation](https://www.postgresql.org/docs/16/tutorial-createdb.html) for a quick guide on how to achieve this.
 
+## Linux
 ```bash
 git clone https://github.com/EdgarModesto23/pluma-api.git
 
@@ -15,6 +16,21 @@ cd pluma-api
 python -m venv .venv
 source ./.venv/bin/activate
 python -m pip install -r requirements.txt
+
+python manage.py migrate
+python manage.py runserver
+```
+
+## Windows
+```bash
+git clone https://github.com/EdgarModesto23/pluma-api.git
+
+cd pluma-api
+python -m venv .venv
+
+.\.venv\Scripts\activate
+python -m pip install -r requirements.txt
+
 
 python manage.py migrate
 python manage.py runserver
