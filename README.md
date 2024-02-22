@@ -11,7 +11,7 @@ Pluma is a reactive and collaborative note-taking web application that aims to s
 ```bash
 git clone https://github.com/EdgarModesto23/pluma-api.git
 
-cd Pluma-backend
+cd pluma-api
 python -m venv .venv
 source ./.venv/bin/activate
 python -m pip install -r requirements.txt
