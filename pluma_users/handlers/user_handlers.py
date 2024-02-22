@@ -3,8 +3,12 @@ from rest_framework.views import APIView
 from rest_framework import permissions, status
 from rest_framework.viewsets import GenericViewSet, mixins
 from pluma_users.models import User
-from pluma_users.serializers.user_serializers import UserSerializer
+from pluma_users.serializers.user_serializers import (
+    CustomTokenObtainPairSerializer,
+    UserSerializer,
+)
 from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework_simplejwt.views import TokenObtainPairView
 
 
 def get_tokens_for_user(user):
@@ -14,6 +18,11 @@ def get_tokens_for_user(user):
         "refresh": str(refresh),
         "access": str(refresh.access_token),
     }
+
+
+class LoginUser(TokenObtainPairView):
+    serializer_class = CustomTokenObtainPairSerializer
+    token_obtain_pair = TokenObtainPairView.as_view()
 
 
 class RetrieveUser(APIView):
@@ -57,6 +66,13 @@ class RegisterUser(APIView):
         serializer.save()
         user = User.objects.get(email=request.data["email"])
         token = get_tokens_for_user(user)
+        user_values = {
+            "username": user.username,
+            "id": user.id,
+            "name": user.name,
+            "email": user.email,
+        }
+        token.update(user_values)
         return Response(token)
 
 

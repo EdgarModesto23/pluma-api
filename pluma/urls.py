@@ -24,6 +24,7 @@ from rest_framework_simplejwt.views import (
 from django.conf import settings
 from django.conf.urls.static import static
 from pluma_app.handlers.invite import invite_user
+from pluma_users.handlers.user_handlers import LoginUser
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -31,7 +32,7 @@ urlpatterns = [
     path("note/", include("pluma_app.routes.notes_routes")),
     path("user/", include("pluma_users.routes.users")),
     path("invite/", view=invite_user, name="invite_user"),
-    path("api/token/", TokenObtainPairView.as_view(), name="token_obtain_pair"),
+    path("api/token/", LoginUser.as_view(), name="token_obtain_pair"),
     path("api/token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
 ]
 
