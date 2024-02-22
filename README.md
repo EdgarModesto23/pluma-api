@@ -14,7 +14,7 @@ git clone https://github.com/EdgarModesto23/pluma-api.git
 cd Pluma-backend
 python -m venv .venv
 source ./.venv/bin/activate
-python -m pip freeze requirements.txt
+python -m pip install -r requirements.txt
 
 python manage.py migrate
 python manage.py runserver
